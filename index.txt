@@ -1,0 +1,163 @@
+Q1. Write a JavaScript function called outerFunction that takes a parameter 
+and returns an inner function. The inner function should access both the parameter
+of outerFunction and a variable declared within outerFunction. Demonstrate how lexical
+scoping allows the inner function to maintain access to these 
+variables even after outerFunction has finished executing.
+
+ans. here is the function called outerFunction.
+
+function outerFunction(param) {
+    let outerVariable =` outer function: ${param}`;
+
+function innerFunction(innerfun) {
+console.log(`the outerfunction parameter is ${param} and the outervariable is 
+${outerVariable}`)
+}
+
+return innerFunction;
+}
+
+let result = outerFunction(`hello`);
+result();
+
+ Q2. Create a JavaScript program that demonstrates the basic usage of 
+ regular expressions. Write a function that takes a regex pattern and a 
+string as input and returns true if there is a match, and false otherwise. Test 
+the function with various patterns and strings.
+
+ans. here is a javascript program that demonstrates the basic usage of regular
+expressions(regex).
+
+//function to write in regex patter again a string
+function regpatter(patter,string) {
+  const regex = new regExp(patter);
+   return regex.test(string);
+}
+
+console.log("testing regex patter:");
+// test as some string;
+console.log(regpatter("^hello$","hello"));
+console.log(regpatter("^hello$", "helliok"));
+
+// Match a digit
+console.log(regpatter("\\d","12"));
+console.log(regpatter("\\d", "helliok"));
+
+// Matching a character set (vowel)
+console.log(regexTest("[aeiou]", "hello"));
+console.log(regexTest("[aeiou]", "bcdfg")); 
+
+// Matching a character range (a-z)
+console.log(regexTest("[a-z]", "hello")); 
+console.log(regexTest("[a-z]", "HELLO"));  
+
+
+Q3. Write a JavaScript program that demonstrates the use of character classes
+in regular expressions. Create a function that searches for specific
+character classes in a given string and returns the matches. Test 
+the function with patterns for digits, uppercase letters, lowercase letters,
+and special characters.
+
+ans. here is a javascript program demonstrates character classes in regular 
+expressions. 
+
+// fuction for character classes of finding matches.
+
+function charClasses(patter,string) {
+    const regex = new RegExp(patter,'g')
+    return string.match(regex);
+}
+// test cases:
+console.log("testing character classes:");
+// find digites
+console.log(charClasses('\\d',"df454d445"));
+
+//find Uppercases
+console.log(charClasses('[A-Z]',"HELLO i"));
+
+//find lowercase
+console.log(charClasses('[a-z]',"HELLO i"));
+//find special character
+console.log(charClasses('[^a-zA-Z0-9]',"H$%^ELLO i"));
+//Find Whitespace characters (\s)
+console.log(findMatches('\\s', "Hello World")); 
+
+
+Q4. Create a JavaScript program that takes a regex pattern and a string as input.
+Write a function that not only checks if there is a match but also extracts
+specific parts of the matched text using groups. Test the function
+with patterns that include groups to capture different
+parts of a date (e.g., day, month, and year) from a given string.
+
+Ans. 
+here is the javascript program that takes regex patter and string as input.
+
+// function of regex patter.
+function regExtract(patter,string) {
+    const regex = new RegExp(patter);
+    const match = string.match(regex);
+  
+    if(match) {
+      console.log("match found:");
+      console.log(`match ${match[0]}`);
+  
+  //extract groups (index 1 or above)
+  for (let i = 1; i <= match.length; i++){
+      console.log(`group ${i}: ${match[i]}`);
+  }
+} else {
+      console.log("not match found")
+  }
+   
+  }
+  
+  //test the cases
+  console.log("Testing regex patter with group");
+  
+  //DD/MM/YYYY format 
+  regExtract(/(\d{2})\/(\d{2})\/(\d{4})/, "birthday: 24/13/1900" );
+//mm//dd//yyy format
+
+regExtract(/(\d{1,2})\/(\d{1,2})\/(\d{4})/,"birthdat: 23/12,1902");
+// yyyy-mm-dd format
+regExtract(/(\d{4})-(\d{1,2})-(\d{1,2})/,"birthday: 1908-12-20");
+
+
+Q5. You are building a shipping application. Write a program that takes the type
+ of package ("standard", "express", or "overnight") and uses a switch
+ statement to calculate and print the estimated delivery time 
+based on the package type. For example, "standard" might take 3-5 days, 
+"express" 1-2 days, and "overnight" would be delivered the next day?
+
+ans. here is the javascript program that calculate estimated delivery time 
+based on their package type. 
+// function to calculate estimated delivery time 
+
+
+function estimateDeliveryTime(packageType){
+    let deliveryTime;
+    
+        switch (packageType.toLowerCase()) {
+            case "standard":
+            deliveryTime = "3-5 business days";
+            break;
+            case "express":
+            deliveryTime = "1-2 business days";
+            break;
+            case "overnight":
+            deliveryTime = "next business days";
+            break;
+            default:
+            deliveryTime = "invalid ";
+            break;
+        }
+        return deliveryTime;
+    }
+    //test case
+    console.log("estimated delivered time:");
+    
+    console.log(`standard package: ${estimateDeliveryTime("standard")}`);
+    console.log(`standard package: ${estimateDeliveryTime("express")}`);
+    console.log(`standard package: ${estimateDeliveryTime("overnight")}`);
+    console.log(`standard package: ${estimateDeliveryTime("")}`);
+
